@@ -34,14 +34,31 @@ public class SearchRepositoryImpl implements SearchRepository{
         MongoDatabase database = client.getDatabase("BlogTracker");
         MongoCollection<Document> collection = database.getCollection("BlogPost");
 
-
-
         AggregateIterable<Document> result = collection.aggregate(Arrays.asList(
                 new Document("$search",
                 new Document("index", "test")
                 .append("text",
                 new Document("query", tag)
                 .append("path", "tags")))));
+
+        result.forEach(doc -> posts.add(converter.read(BlogPost.class,doc)));
+
+        return posts;
+    }
+
+    @Override
+    public List<BlogPost> findByUsername(String username){
+        final List<BlogPost> posts = new ArrayList<>();
+
+        MongoDatabase database = client.getDatabase("BlogTracker");
+        MongoCollection<Document> collection = database.getCollection("BlogPost");
+
+        AggregateIterable<Document> result = collection.aggregate(Arrays.asList(
+                new Document("$search",
+                new Document("index", "test")
+                .append("text",
+                new Document("query", username)
+                .append("path", "username")))));
 
         result.forEach(doc -> posts.add(converter.read(BlogPost.class,doc)));
 

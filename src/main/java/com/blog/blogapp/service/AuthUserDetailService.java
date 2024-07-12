@@ -37,9 +37,8 @@ public class AuthUserDetailService implements UserDetailsService {
         }
     }
 
-    @Async
-    public CompletableFuture<String> getCurrentUsername() {
-        return CompletableFuture.supplyAsync(() -> {
+    public String getCurrentUsername() {
+
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = null;
 
@@ -52,7 +51,7 @@ public class AuthUserDetailService implements UserDetailsService {
             }
 
             return username;
-        });
+        }
 
     }
 }

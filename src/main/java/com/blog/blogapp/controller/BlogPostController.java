@@ -3,6 +3,7 @@ package com.blog.blogapp.controller;
 import com.blog.blogapp.model.BlogPost;
 import com.blog.blogapp.repository.BlogPostRepository;
 import com.blog.blogapp.repository.SearchRepository;
+import com.blog.blogapp.service.AuthUserDetailService;
 import com.blog.blogapp.service.OllamaModelSercice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,9 @@ public class BlogPostController {
     @Autowired
     private OllamaModelSercice ollamaModelSercice;
 
+    @Autowired
+    private AuthUserDetailService authUserDetailService;
+
     @GetMapping("/posts")
     public List<BlogPost> getAll(){
         return data.findAll();
@@ -42,6 +46,7 @@ public class BlogPostController {
     @PostMapping("/post")
     public BlogPost addBlogPost(@RequestBody BlogPost post)
     {
+        post.setUsername(authUserDetailService.getCurrentUsername());
         return data.save(post);
     }
 

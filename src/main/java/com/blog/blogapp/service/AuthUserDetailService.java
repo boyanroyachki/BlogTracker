@@ -4,7 +4,6 @@ import com.blog.blogapp.model.AuthUser;
 import com.blog.blogapp.repository.AuthUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -14,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 @AllArgsConstructor

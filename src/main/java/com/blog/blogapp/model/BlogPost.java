@@ -1,11 +1,17 @@
 package com.blog.blogapp.model;
 
+import lombok.Builder;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Arrays;
-
+@Data
+@Builder
 @Document(collection = "BlogPost")
 public class BlogPost {
+
+    @Id
+    private String id;
 
     private String topic;
 
@@ -14,49 +20,4 @@ public class BlogPost {
     private String username;
 
     private String[] tags;
-
-    public BlogPost() {
-    }
-
-    public String[] getTags() {
-        return tags;
-    }
-
-    public void setTags(String[] tags) {
-        this.tags = tags;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    @Override
-    public String toString() {
-        return "BlogPost{" +
-                "topic='" + topic + '\'' +
-                ", content='" + content + '\'' +
-                ", username='" + username + '\'' +
-                ", tags=" + Arrays.toString(tags) +
-                '}';
-    }
 }

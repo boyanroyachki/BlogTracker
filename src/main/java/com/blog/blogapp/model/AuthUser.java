@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
-@Document("user")
+@Document(collection = "User")
 public class AuthUser {
 
     @Id

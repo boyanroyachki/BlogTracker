@@ -4,6 +4,9 @@ import com.blog.blogapp.model.AuthUser;
 import com.blog.blogapp.repository.AuthUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @AllArgsConstructor
@@ -33,4 +37,22 @@ public class AuthUserDetailService implements UserDetailsService {
         }
     }
 
+    @Async
+    public CompletableFuture<String> getCurrentUsername() {
+        return CompletableFuture.supplyAsync(() -> {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = null;
+
+            if (authentication != null) {
+                if (authentication.getPrincipal() instanceof UserDetails) {
+                    username = ((UserDetails) authentication.getPrincipal()).getUsername();
+                } else {
+                    username = authentication.getPrincipal().toString();
+                }
+            }
+
+            return username;
+        });
+
+    }
 }

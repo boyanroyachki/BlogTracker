@@ -50,4 +50,13 @@ public class AuthUserDetailService implements UserDetailsService {
 
             return username;
     }
+
+    public AuthUser getCurrentAuthUser() {
+        String username = getCurrentUsername();
+        if (username != null) {
+            return userRepository.findByUsername(username.toLowerCase())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+        }
+        return null;
+    }
 }

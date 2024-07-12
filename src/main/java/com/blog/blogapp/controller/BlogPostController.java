@@ -49,6 +49,7 @@ public class BlogPostController {
     public BlogPost addBlogPost(@RequestBody BlogPost post)
     {
         post.setUsername(authUserDetailService.getCurrentUsername());
+        post.setAuthor(authUserDetailService.getCurrentAuthUser());
         return data.save(post);
     }
 

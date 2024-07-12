@@ -3,6 +3,7 @@ package com.blog.blogapp.model;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -18,6 +19,9 @@ public class BlogPost {
     private String content;
 
     private String username;
+
+    @DBRef
+    private AuthUser author;
 
     private String[] tags;
 }

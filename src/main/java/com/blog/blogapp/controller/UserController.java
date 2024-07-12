@@ -3,6 +3,7 @@ package com.blog.blogapp.controller;
 import com.blog.blogapp.model.AuthUser;
 import com.blog.blogapp.model.LoginRequest;
 import com.blog.blogapp.repository.AuthUserRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
-    public ResponseEntity registerUser(@RequestBody AuthUser user){
+    public ResponseEntity registerUser(@Valid @RequestBody AuthUser user){
         try {
             if (authUserRepository.findByUsername(user.getUsername()).isPresent())
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already taken. Please try again");

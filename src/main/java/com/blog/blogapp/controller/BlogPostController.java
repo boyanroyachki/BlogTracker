@@ -27,6 +27,8 @@ public class BlogPostController {
     @Autowired
     private AuthUserDetailService authUserDetailService;
 
+
+
     @GetMapping("/posts")
     public List<BlogPost> getAll(){
         return data.findAll();
@@ -49,8 +51,6 @@ public class BlogPostController {
         post.setUsername(authUserDetailService.getCurrentUsername());
         return data.save(post);
     }
-
-
 
 //    @GetMapping("/penis")
 //    public String test() throws JsonProcessingException {

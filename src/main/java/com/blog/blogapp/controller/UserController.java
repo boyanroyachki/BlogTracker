@@ -31,6 +31,8 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+
+
     @PostMapping("/register")
     public ResponseEntity registerUser(@Valid @RequestBody AuthUser user){
         try {

@@ -20,8 +20,7 @@ public class BlogPost {
 
     private String username;
 
-    @DBRef
-    private AuthUser author;
+    private String authUserId;
 
     private String[] tags;
 }

@@ -1,5 +1,6 @@
 package com.blog.blogapp.repository;
 
+import com.blog.blogapp.model.AuthUser;
 import com.blog.blogapp.model.BlogPost;
 
 import java.util.List;
